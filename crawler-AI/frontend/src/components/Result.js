@@ -17,6 +17,8 @@ function Result({ result }) {
   const keyPoints = result.key_points || [];
   const actionPrompt = result.action_prompt || result.recommendation;
   const jobs = result.jobs || [];
+  const products = result.products || [];
+  const events = result.events || [];
   const sources = result.sources || [];
   const intent = result.intent || (result.user_friendly?.key_claim_verdict?.toLowerCase() === "jobs" ? "jobs" : "general");
   
@@ -97,6 +99,84 @@ function Result({ result }) {
                   className="btn btn-apply"
                 >
                   Apply Now 🚀
+                </a>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* Products Grid (if products intent) */}
+      {intent === "products" && products.length > 0 && (
+        <div className="jobs-section animate-fade-in">
+          <h5>🛍️ Recommended Products Found</h5>
+          <div className="jobs-grid">
+            {products.map((product, idx) => (
+              <div key={idx} className="job-card">
+                <div className="job-card-header">
+                  {product.rating && product.rating !== "Not specified" && (
+                    <span className="job-match-badge" style={{
+                      background: "rgba(245, 158, 11, 0.15)",
+                      color: "#f59e0b",
+                      border: "1px solid rgba(245, 158, 11, 0.3)"
+                    }}>
+                      ⭐ {product.rating}
+                    </span>
+                  )}
+                </div>
+                <h6 className="job-title">{product.name}</h6>
+                <div className="job-company" style={{ fontSize: "1.1rem", color: "#a855f7", margin: "5px 0" }}>
+                  💵 {product.price || "Not specified"}
+                </div>
+                <p className="source-snippet" style={{ margin: "10px 0", fontSize: "0.85rem", height: "60px", overflow: "hidden" }}>
+                  {product.description}
+                </p>
+                <a
+                  href={product.source_url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn btn-apply"
+                  style={{ background: "linear-gradient(135deg, #f59e0b 0%, #d97706 100%)", marginTop: "auto" }}
+                >
+                  View Product 🛒
+                </a>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* Events Grid (if events intent) */}
+      {intent === "events" && events.length > 0 && (
+        <div className="jobs-section animate-fade-in">
+          <h5>📅 Upcoming Events & Hackathons</h5>
+          <div className="jobs-grid">
+            {events.map((event, idx) => (
+              <div key={idx} className="job-card">
+                <div className="job-card-header">
+                  <span className="job-match-badge" style={{
+                    background: "rgba(168, 85, 247, 0.15)",
+                    color: "#a855f7",
+                    border: "1px solid rgba(168, 85, 247, 0.3)"
+                  }}>
+                    📅 {event.date || "Upcoming"}
+                  </span>
+                </div>
+                <h6 className="job-title">{event.name}</h6>
+                <div className="job-company" style={{ fontSize: "0.9rem", color: "#9ca3af", margin: "5px 0" }}>
+                  📍 {event.location || "Multiple locations"}
+                </div>
+                <p className="source-snippet" style={{ margin: "10px 0", fontSize: "0.85rem", height: "60px", overflow: "hidden" }}>
+                  {event.description}
+                </p>
+                <a
+                  href={event.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn btn-apply"
+                  style={{ background: "linear-gradient(135deg, #a855f7 0%, #7e22ce 100%)", marginTop: "auto" }}
+                >
+                  Register Now 🎟️
                 </a>
               </div>
             ))}

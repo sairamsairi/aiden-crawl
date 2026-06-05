@@ -8,7 +8,7 @@ sys.path.insert(0, str(Path(__file__).parent))
 from services.search_agent_service import SearchAgentService
 
 async def main():
-    query = "Find me remote Python developer jobs"
+    query = "Find me remote Python developer jobs posted this week"
     print(f"Running pipeline for query: '{query}'")
     try:
         res = await SearchAgentService.run_pipeline(query)

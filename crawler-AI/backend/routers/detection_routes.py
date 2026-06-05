@@ -115,6 +115,8 @@ async def detect_text_detailed(
             "key_points": pipeline_result["key_points"],
             "action_prompt": pipeline_result["action_prompt"],
             "jobs": pipeline_result["jobs"],
+            "products": pipeline_result.get("products", []),
+            "events": pipeline_result.get("events", []),
             "sources": pipeline_result["sources"],
             "intent": pipeline_result["intent"]
         }

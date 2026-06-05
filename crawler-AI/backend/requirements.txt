@@ -11,9 +11,6 @@ anthropic>=0.31.0
 passlib[bcrypt]==1.7.4
 bcrypt==3.2.2
 cohere>=5.0.0
-passlib==1.7.4
-python-jose[cryptography]==3.3.0
-cryptography==41.0.7
 
 # Data Processing
 transformers>=4.40.0
